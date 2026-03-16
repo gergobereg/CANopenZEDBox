@@ -526,10 +526,25 @@ main(int argc, char* argv[]) {
             continue;
         }
 
-        CO_LSS_address_t lssAddress = {.identity = {.vendorID = OD_PERSIST_COMM.x1018_identity.vendor_ID,
-                                                    .productCode = OD_PERSIST_COMM.x1018_identity.productCode,
-                                                    .revisionNumber = OD_PERSIST_COMM.x1018_identity.revisionNumber,
-                                                    .serialNumber = OD_PERSIST_COMM.x1018_identity.serialNumber}};
+        CO_LSS_address_t lssAddress = {0};
+#ifdef OD_ENTRY_H1018
+        {
+            uint32_t vendorID = 0;
+            uint32_t productCode = 0;
+            uint32_t revisionNumber = 0;
+            uint32_t serialNumber = 0;
+
+            (void)OD_get_u32(OD_ENTRY_H1018, 1, &vendorID, true);
+            (void)OD_get_u32(OD_ENTRY_H1018, 2, &productCode, true);
+            (void)OD_get_u32(OD_ENTRY_H1018, 3, &revisionNumber, true);
+            (void)OD_get_u32(OD_ENTRY_H1018, 4, &serialNumber, true);
+
+            lssAddress.identity.vendorID = vendorID;
+            lssAddress.identity.productCode = productCode;
+            lssAddress.identity.revisionNumber = revisionNumber;
+            lssAddress.identity.serialNumber = serialNumber;
+        }
+#endif
         err = CO_LSSinit(CO, &lssAddress, &mlStorage.pendingNodeId, &mlStorage.pendingBitRate);
         if (err != CO_ERROR_NO) {
             log_printf(LOG_CRIT, DBG_CAN_OPEN, "CO_LSSinit()", err);

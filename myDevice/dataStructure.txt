@@ -1,0 +1,21 @@
+/* PLC -> Linux (RPDO mapped to 0x3000:01) */
+Speed                    | kmh*10           | uint 1byte 
+
+
+/* Linux -> PLC (TPDO mapped to 0x3800:01) */
+Message ID               | ID               | uint 1byte  
+
+Close Cultivator Left    | TRUE/FALSE       | uint 1byte  
+Close Cultivator Right   | TRUE/FALSE       | uint 1byte  
+
+Setpoint Height Left     | 0-255 cm         | uint 1byte    
+SetPoint Height Right    | 0-255 cm         | uint 1byte  
+
+ActPos Height Left       | 0-255 cm         | uint 1byte 
+ACtPos Height Right      | 0-255 cm         | uint 1byte 
+
+GreenDuty Left           | %                | uint 1byte 
+GreenDuty Right          | %                | uint 1byte 
+
+LatError Left            | +- mm            | int16 2byte
+LatError Right           | +- mm            | int16 2byte

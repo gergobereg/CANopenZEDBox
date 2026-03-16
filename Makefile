@@ -3,7 +3,7 @@
 
 DRV_SRC = .
 CANOPEN_SRC = CANopenNode
-APPL_SRC = CANopenNode/example
+APPL_SRC = myDevice
 
 
 LINK_TARGET = canopend
@@ -41,6 +41,7 @@ SOURCES = \
 	$(CANOPEN_SRC)/extra/CO_trace.c \
 	$(CANOPEN_SRC)/CANopen.c \
 	$(APPL_SRC)/OD.c \
+	$(DRV_SRC)/CO_application.c \
 	$(DRV_SRC)/CO_main_basic.c
 
 
@@ -50,6 +51,9 @@ OPT =
 OPT += -g
 #OPT += -O2
 OPT += -DCO_SINGLE_THREAD
+OPT += -DCO_USE_APPLICATION
+OPT += -DCO_CONFIG_STORAGE=0
+OPT += -DCO_CONFIG_GTW=0
 #OPT += -DCO_CONFIG_DEBUG=0xFFFF
 #OPT += -Wextra -Wshadow -pedantic -fanalyzer
 #OPT += -DCO_USE_GLOBALS
