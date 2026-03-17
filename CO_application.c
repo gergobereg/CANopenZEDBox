@@ -44,6 +44,7 @@ static void app_processTerminalCommand(CO_t* co, const char* line) {
 
     CO_LOCK_OD(co->CANmodule);
     switch (index) {
+        /* 0x3800:01 Message ID */
         case 0x3800:
             if (value < 0 || value > 255) {
                 CO_UNLOCK_OD(co->CANmodule);
@@ -53,6 +54,7 @@ static void app_processTerminalCommand(CO_t* co, const char* line) {
             }
             OD_RAM.x3800_digital_Inputs1[0] = (uint8_t)value;
             break;
+        /* 0x3801:01 Close Cultivator Left */
         case 0x3801:
             if (value < 0 || value > 255) {
                 CO_UNLOCK_OD(co->CANmodule);
@@ -62,6 +64,7 @@ static void app_processTerminalCommand(CO_t* co, const char* line) {
             }
             OD_RAM.x3801_digital_Inputs2[0] = (uint8_t)value;
             break;
+        /* 0x3802:01 Close Cultivator Right */
         case 0x3802:
             if (value < 0 || value > 255) {
                 CO_UNLOCK_OD(co->CANmodule);
@@ -71,6 +74,7 @@ static void app_processTerminalCommand(CO_t* co, const char* line) {
             }
             OD_RAM.x3802_digital_Inputs3[0] = (uint8_t)value;
             break;
+        /* 0x3803:01 Setpoint Height Left */
         case 0x3803:
             if (value < 0 || value > 255) {
                 CO_UNLOCK_OD(co->CANmodule);
@@ -80,6 +84,7 @@ static void app_processTerminalCommand(CO_t* co, const char* line) {
             }
             OD_RAM.x3803_digital_Inputs4[0] = (uint8_t)value;
             break;
+        /* 0x3804:01 SetPoint Height Right */
         case 0x3804:
             if (value < 0 || value > 255) {
                 CO_UNLOCK_OD(co->CANmodule);
@@ -89,6 +94,7 @@ static void app_processTerminalCommand(CO_t* co, const char* line) {
             }
             OD_RAM.x3804_digital_Inputs5[0] = (uint8_t)value;
             break;
+        /* 0x3805:01 ActPos Height Left */
         case 0x3805:
             if (value < 0 || value > 255) {
                 CO_UNLOCK_OD(co->CANmodule);
@@ -98,6 +104,7 @@ static void app_processTerminalCommand(CO_t* co, const char* line) {
             }
             OD_RAM.x3805_digital_Inputs6[0] = (uint8_t)value;
             break;
+        /* 0x3806:01 ACtPos Height Right */
         case 0x3806:
             if (value < 0 || value > 255) {
                 CO_UNLOCK_OD(co->CANmodule);
@@ -107,6 +114,7 @@ static void app_processTerminalCommand(CO_t* co, const char* line) {
             }
             OD_RAM.x3806_digital_Inputs7[0] = (uint8_t)value;
             break;
+        /* 0x3807:01 GreenDuty Left */
         case 0x3807:
             if (value < 0 || value > 255) {
                 CO_UNLOCK_OD(co->CANmodule);
@@ -116,6 +124,7 @@ static void app_processTerminalCommand(CO_t* co, const char* line) {
             }
             OD_RAM.x3807_digital_Inputs8[0] = (uint8_t)value;
             break;
+        /* 0x3808:01 GreenDuty Right */
         case 0x3808:
             if (value < 0 || value > 255) {
                 CO_UNLOCK_OD(co->CANmodule);
@@ -125,6 +134,7 @@ static void app_processTerminalCommand(CO_t* co, const char* line) {
             }
             OD_RAM.x3808_digital_Inputs9[0] = (uint8_t)value;
             break;
+        /* 0x3809:01 LatError Left */
         case 0x3809:
             if (value < -32768 || value > 32767) {
                 CO_UNLOCK_OD(co->CANmodule);
@@ -134,6 +144,7 @@ static void app_processTerminalCommand(CO_t* co, const char* line) {
             }
             OD_RAM.x3809_digital_Inputs10[0] = (int16_t)value;
             break;
+        /* 0x380A:01 LatError Right */
         case 0x380A:
             if (value < -32768 || value > 32767) {
                 CO_UNLOCK_OD(co->CANmodule);
@@ -186,7 +197,7 @@ void app_programAsync(CO_t* co, uint32_t timer1usDiff) {
 
     (void)timer1usDiff;
 
-    /* PLC -> Linux (RPDO mapped to 0x3000:01) */
+    /* 0x3000:01 Speed, PLC -> Linux (RPDO mapped to 0x3000:01) */
     uint8_t plc_out;
     CO_LOCK_OD(co->CANmodule);
     plc_out = OD_RAM.x3000_digital_Outputs1[0];
