@@ -1,25 +1,24 @@
-/* PLC -> Linux (RPDO mapped to 0x3000:01) */
-
-
 Name                     | value/uint       | Data type     | Index
-______________________________________________________________________
-Speed                    | kmh*10           | usint 1byte    | 16#3800
+_________________________|__________________|_______________|____________
+
+/* PLC -> Linux (RPDO mapped to 0x3000:01) */
+Speed                    | kmh*10           | usint 1byte    | 16#3000
 
 
-/* Linux -> PLC (TPDO mapped to 0x3800:01) */
-Message ID               | ID               | usint 1byte    | 16#3000  
+/* Linux -> PLC (TPDO mapped from 0x3800:01 to 0x380A:01 ) */
+Message ID               | ID               | usint 1byte    | 16#3800  
 
-Close Cultivator Left    | TRUE/FALSE       | usint 1byte    | 16#3001  
-Close Cultivator Right   | TRUE/FALSE       | usint 1byte    | 16#3002  
+Close Cultivator Left    | TRUE/FALSE       | usint 1byte    | 16#3801  
+Close Cultivator Right   | TRUE/FALSE       | usint 1byte    | 16#3802  
 
-Setpoint Height Left     | 0-255 cm         | usint 1byte    | 16#3003    
-SetPoint Height Right    | 0-255 cm         | usint 1byte    | 16#3004  
+Setpoint Height Left     | 0-255 cm         | usint 1byte    | 16#3803    
+SetPoint Height Right    | 0-255 cm         | usint 1byte    | 16#3804  
 
-ActPos Height Left       | 0-255 cm         | usint 1byte    | 16#3005 
-ACtPos Height Right      | 0-255 cm         | usint 1byte    | 16#3006 
+ActPos Height Left       | 0-255 cm         | usint 1byte    | 16#3805 
+ACtPos Height Right      | 0-255 cm         | usint 1byte    | 16#3806 
 
-GreenDuty Left           | %                | usint 1byte    | 16#3007 
-GreenDuty Right          | %                | usint 1byte    | 16#3008 
+GreenDuty Left           | %                | usint 1byte    | 16#3807 
+GreenDuty Right          | %                | usint 1byte    | 16#3808 
 
-LatError Left            | +- mm            | int16 2byte   | 16#3009
-LatError Right           | +- mm            | int16 2byte   | 16#300A
+LatError Left            | +- mm            | int16 2byte   | 16#3809
+LatError Right           | +- mm            | int16 2byte   | 16#380A
