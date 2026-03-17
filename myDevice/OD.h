@@ -41,8 +41,8 @@
 #define OD_CNT_HB_CONS 1
 #define OD_CNT_HB_PROD 1
 #define OD_CNT_SDO_SRV 1
-#define OD_CNT_RPDO 1
-#define OD_CNT_TPDO 1
+#define OD_CNT_RPDO 2
+#define OD_CNT_TPDO 2
 
 
 /*******************************************************************************
@@ -51,7 +51,9 @@
 #define OD_CNT_ARR_1003 3
 #define OD_CNT_ARR_1016 1
 #define OD_CNT_ARR_3000 1
+#define OD_CNT_ARR_3001 1
 #define OD_CNT_ARR_3800 1
+#define OD_CNT_ARR_3801 1
 
 
 /*******************************************************************************
@@ -86,9 +88,18 @@ typedef struct {
         uint8_t transmissionType;
     } x1400_RPDOCommunicationParameter;
     struct {
+        uint8_t highestSub_indexSupported;
+        uint32_t COB_IDUsedByRPDO;
+        uint8_t transmissionType;
+    } x1401_RPDOCommunicationParameter;
+    struct {
         uint8_t numberOfMappedApplicationObjectsInPDO;
         uint32_t mappingEntry;
     } x1600_RPDOMappingParameter;
+    struct {
+        uint8_t numberOfMappedApplicationObjectsInPDO;
+        uint32_t mappingEntry;
+    } x1601_RPDOMappingParameter;
     struct {
         uint8_t highestSub_indexSupported;
         uint32_t COB_IDUsedByTPDO;
@@ -98,13 +109,29 @@ typedef struct {
         uint16_t eventTimer;
     } x1800_TPDOCommunicationParameter;
     struct {
+        uint8_t highestSub_indexSupported;
+        uint32_t COB_IDUsedByTPDO;
+        uint8_t transmissionType;
+        uint16_t inhibitTime;
+        uint8_t compatibilityEntry;
+        uint16_t eventTimer;
+    } x1801_TPDOCommunicationParameter;
+    struct {
         uint8_t numberOfMappedApplicationObjectsInTPDO;
         uint32_t mappingEntry;
     } x1A00_TPDOMappingParameter;
+    struct {
+        uint8_t numberOfMappedApplicationObjectsInTPDO;
+        uint32_t mappingEntry;
+    } x1A01_TPDOMappingParameter;
     uint8_t x3000_digital_Outputs1_sub0;
     uint8_t x3000_digital_Outputs1[OD_CNT_ARR_3000];
+    uint8_t x3001_digital_Outputs2_sub0;
+    int16_t x3001_digital_Outputs2[OD_CNT_ARR_3001];
     uint8_t x3800_digital_Inputs1_sub0;
     uint8_t x3800_digital_Inputs1[OD_CNT_ARR_3800];
+    uint8_t x3801_digital_Inputs2_sub0;
+    int16_t x3801_digital_Inputs2[OD_CNT_ARR_3801];
 } OD_RAM_t;
 
 #ifndef OD_ATTR_RAM
@@ -134,11 +161,17 @@ extern OD_ATTR_OD OD_t *OD;
 #define OD_ENTRY_H1018 &OD->list[10]
 #define OD_ENTRY_H1200 &OD->list[11]
 #define OD_ENTRY_H1400 &OD->list[12]
-#define OD_ENTRY_H1600 &OD->list[13]
-#define OD_ENTRY_H1800 &OD->list[14]
-#define OD_ENTRY_H1A00 &OD->list[15]
-#define OD_ENTRY_H3000 &OD->list[16]
-#define OD_ENTRY_H3800 &OD->list[17]
+#define OD_ENTRY_H1401 &OD->list[13]
+#define OD_ENTRY_H1600 &OD->list[14]
+#define OD_ENTRY_H1601 &OD->list[15]
+#define OD_ENTRY_H1800 &OD->list[16]
+#define OD_ENTRY_H1801 &OD->list[17]
+#define OD_ENTRY_H1A00 &OD->list[18]
+#define OD_ENTRY_H1A01 &OD->list[19]
+#define OD_ENTRY_H3000 &OD->list[20]
+#define OD_ENTRY_H3001 &OD->list[21]
+#define OD_ENTRY_H3800 &OD->list[22]
+#define OD_ENTRY_H3801 &OD->list[23]
 
 
 /*******************************************************************************
@@ -157,11 +190,17 @@ extern OD_ATTR_OD OD_t *OD;
 #define OD_ENTRY_H1018_identityObject &OD->list[10]
 #define OD_ENTRY_H1200_serverSdoParameter &OD->list[11]
 #define OD_ENTRY_H1400_RPDOCommunicationParameter &OD->list[12]
-#define OD_ENTRY_H1600_RPDOMappingParameter &OD->list[13]
-#define OD_ENTRY_H1800_TPDOCommunicationParameter &OD->list[14]
-#define OD_ENTRY_H1A00_TPDOMappingParameter &OD->list[15]
-#define OD_ENTRY_H3000_digital_Outputs1 &OD->list[16]
-#define OD_ENTRY_H3800_digital_Inputs1 &OD->list[17]
+#define OD_ENTRY_H1401_RPDOCommunicationParameter &OD->list[13]
+#define OD_ENTRY_H1600_RPDOMappingParameter &OD->list[14]
+#define OD_ENTRY_H1601_RPDOMappingParameter &OD->list[15]
+#define OD_ENTRY_H1800_TPDOCommunicationParameter &OD->list[16]
+#define OD_ENTRY_H1801_TPDOCommunicationParameter &OD->list[17]
+#define OD_ENTRY_H1A00_TPDOMappingParameter &OD->list[18]
+#define OD_ENTRY_H1A01_TPDOMappingParameter &OD->list[19]
+#define OD_ENTRY_H3000_digital_Outputs1 &OD->list[20]
+#define OD_ENTRY_H3001_digital_Outputs2 &OD->list[21]
+#define OD_ENTRY_H3800_digital_Inputs1 &OD->list[22]
+#define OD_ENTRY_H3801_digital_Inputs2 &OD->list[23]
 
 
 /*******************************************************************************

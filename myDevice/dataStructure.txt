@@ -1,21 +1,25 @@
 /* PLC -> Linux (RPDO mapped to 0x3000:01) */
-Speed                    | kmh*10           | uint 1byte 
+
+
+Name                     | value/uint       | Data type     | Index
+______________________________________________________________________
+Speed                    | kmh*10           | usint 1byte    | 16#3800
 
 
 /* Linux -> PLC (TPDO mapped to 0x3800:01) */
-Message ID               | ID               | uint 1byte  
+Message ID               | ID               | usint 1byte    | 16#3000  
 
-Close Cultivator Left    | TRUE/FALSE       | uint 1byte  
-Close Cultivator Right   | TRUE/FALSE       | uint 1byte  
+Close Cultivator Left    | TRUE/FALSE       | usint 1byte    | 16#3001  
+Close Cultivator Right   | TRUE/FALSE       | usint 1byte    | 16#3002  
 
-Setpoint Height Left     | 0-255 cm         | uint 1byte    
-SetPoint Height Right    | 0-255 cm         | uint 1byte  
+Setpoint Height Left     | 0-255 cm         | usint 1byte    | 16#3003    
+SetPoint Height Right    | 0-255 cm         | usint 1byte    | 16#3004  
 
-ActPos Height Left       | 0-255 cm         | uint 1byte 
-ACtPos Height Right      | 0-255 cm         | uint 1byte 
+ActPos Height Left       | 0-255 cm         | usint 1byte    | 16#3005 
+ACtPos Height Right      | 0-255 cm         | usint 1byte    | 16#3006 
 
-GreenDuty Left           | %                | uint 1byte 
-GreenDuty Right          | %                | uint 1byte 
+GreenDuty Left           | %                | usint 1byte    | 16#3007 
+GreenDuty Right          | %                | usint 1byte    | 16#3008 
 
-LatError Left            | +- mm            | int16 2byte
-LatError Right           | +- mm            | int16 2byte
+LatError Left            | +- mm            | int16 2byte   | 16#3009
+LatError Right           | +- mm            | int16 2byte   | 16#300A
