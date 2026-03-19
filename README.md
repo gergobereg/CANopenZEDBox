@@ -1,3 +1,44 @@
+**CANopenZEDBox**
+
+run:
+sudo ./canopend can0 -i 4
+where 4 is the node id
+
+Application is in CO_application.c
+
+RPDO0x3000 Speed is printed out.
+From 0x3800:01 to 0x380A:01 the value can be set via terminal, e.g.: PDO380A=-2697 
+
+
+Data structure
+
+Name                     | value/uint       | Data type     | Index
+_________________________|__________________|_______________|____________
+
+/* PLC -> Linux (RPDO mapped to 0x3000:01) */
+Speed                    | kmh*10           | usint 1byte    | 16#3000
+
+
+/* Linux -> PLC (TPDO mapped from 0x3800:01 to 0x380A:01 ) */
+Message ID               | ID               | usint 1byte    | 16#3800  
+
+Close Cultivator Left    | TRUE/FALSE       | usint 1byte    | 16#3801  
+Close Cultivator Right   | TRUE/FALSE       | usint 1byte    | 16#3802  
+
+Setpoint Height Left     | 0-255 cm         | usint 1byte    | 16#3803    
+SetPoint Height Right    | 0-255 cm         | usint 1byte    | 16#3804  
+
+ActPos Height Left       | 0-255 cm         | usint 1byte    | 16#3805 
+ACtPos Height Right      | 0-255 cm         | usint 1byte    | 16#3806 
+
+GreenDuty Left           | %                | usint 1byte    | 16#3807 
+GreenDuty Right          | %                | usint 1byte    | 16#3808 
+
+LatError Left            | +- mm            | int16 2byte   | 16#3809
+LatError Right           | +- mm            | int16 2byte   | 16#380A
+
+================================================================================================
+
 CANopenLinux                                               {#readmeCANopenLinux}
 ============
 
